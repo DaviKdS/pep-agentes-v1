@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Build/output
+output/
+dist/
+build/
+*.zip
+*.spec
+installer/Output/
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Validate the expected package structure.
+
+This script checks local files only. It does not transmit data anywhere.
+"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+REQUIRED_FILES = [
+    "README.md",
+    "COMO_USAR.md",
+    "SECURITY.md",
+    ".gitignore",
+    ".env.example",
+    "manifest.json",
+    "requirements.txt",
+    "prompts/pep-agentes-completo.txt",
+    "prompts/pep-agentes-curto.txt",
+    "prompts/pep-agentes-claude.txt",
+    "docs/documentacao.pdf",
+    "docs/COMO_FOI_GERADO.md",
+    "claude/CLAUDE.md",
+    "claude/commands/pep.md",
+    "requirements-app.txt",
+    "scripts/build_zip.py",
+    "scripts/generate_documentation_pdf.py",
+    "scripts/validate_package.py",
+    "scripts/update_prompt.py",
+    "scripts/install_claude.py",
+    "scripts/pep_gui.py",
+    "scripts/build_app.py",
+    "scripts/publish_github.sh",
+    "scripts/publish_github.ps1",
+    "installer/install_app.ps1",
+    "installer/uninstall_app.ps1",
+    "installer/PEP-Agentes.iss",
+]
+
+
+def main() -> int:
+    missing = [path for path in REQUIRED_FILES if not (PROJECT_ROOT / path).exists()]
+    if missing:
+        print("Arquivos ausentes:")
+        for path in missing:
+            print(f"- {path}")
+        return 1
+
+    print("Pacote validado com sucesso.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

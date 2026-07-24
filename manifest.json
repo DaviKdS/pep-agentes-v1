@@ -1,0 +1,117 @@
+{
+  "name": "pep-agentes-v1",
+  "version": "1.0",
+  "generated_at_utc": "2026-07-24T15:37:26.209221+00:00",
+  "policy_notes": [
+    "Sem credenciais reais.",
+    "Sem dados pessoais.",
+    "Scripts locais, auditáveis e sem envio automático de dados.",
+    "Neutralidade profissional sem remover créditos legítimos ou licenças de terceiros."
+  ],
+  "files": [
+    {
+      "path": ".env.example",
+      "size_bytes": 247
+    },
+    {
+      "path": ".gitignore",
+      "size_bytes": 188
+    },
+    {
+      "path": "COMO_USAR.md",
+      "size_bytes": 1024
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 4026
+    },
+    {
+      "path": "SECURITY.md",
+      "size_bytes": 737
+    },
+    {
+      "path": "docs/COMO_FOI_GERADO.md",
+      "size_bytes": 1216
+    },
+    {
+      "path": "docs/documentacao.pdf",
+      "size_bytes": 3181
+    },
+    {
+      "path": "prompts/pep-agentes-completo.txt",
+      "size_bytes": 5660
+    },
+    {
+      "path": "prompts/pep-agentes-curto.txt",
+      "size_bytes": 770
+    },
+    {
+      "path": "prompts/pep-agentes-claude.txt",
+      "size_bytes": 5490
+    },
+    {
+      "path": "claude/CLAUDE.md",
+      "size_bytes": 2622
+    },
+    {
+      "path": "claude/commands/pep.md",
+      "size_bytes": 1547
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 17
+    },
+    {
+      "path": "requirements-app.txt",
+      "size_bytes": 171
+    },
+    {
+      "path": "scripts/build_zip.py",
+      "size_bytes": 1415
+    },
+    {
+      "path": "scripts/generate_documentation_pdf.py",
+      "size_bytes": 3842
+    },
+    {
+      "path": "scripts/install_claude.py",
+      "size_bytes": 7263
+    },
+    {
+      "path": "scripts/pep_gui.py",
+      "size_bytes": 8684
+    },
+    {
+      "path": "scripts/build_app.py",
+      "size_bytes": 2820
+    },
+    {
+      "path": "scripts/publish_github.ps1",
+      "size_bytes": 529
+    },
+    {
+      "path": "scripts/publish_github.sh",
+      "size_bytes": 645
+    },
+    {
+      "path": "scripts/update_prompt.py",
+      "size_bytes": 1153
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 1432
+    },
+    {
+      "path": "installer/install_app.ps1",
+      "size_bytes": 2415
+    },
+    {
+      "path": "installer/uninstall_app.ps1",
+      "size_bytes": 713
+    },
+    {
+      "path": "installer/PEP-Agentes.iss",
+      "size_bytes": 1240
+    }
+  ]
+}
