@@ -1,0 +1,4 @@
+# Dependencias da GUI (scripts/pep_gui.py) e do build do executavel.
+# Instale com: python -m pip install -r requirements-app.txt
+customtkinter>=5.2.0
+pyinstaller>=5.13.0
