@@ -34,3 +34,25 @@ Usando o PEP-Agentes v1.0, crie um site para barbeiro com landing page, catálog
 ## O que esperar
 
 O assistente deve organizar a resposta com agentes dinâmicos, arquitetura, estrutura de arquivos, código, comandos, segurança, melhorias futuras e prompt para Codex.
+
+## Codex
+
+Para usar o PEP no Codex, instale a skill:
+
+```bash
+python scripts/install_codex.py --global
+```
+
+Depois use:
+
+```text
+$pepcodex sua tarefa aqui
+```
+
+O modo econômico já é padrão. Para compatibilidade com Custom Prompts:
+
+```bash
+python scripts/install_codex.py --global --legacy-prompt
+```
+
+Então use `/prompts:pepcodex`. O comando `/pepcodex` puro não é a sintaxe oficial atual do Codex.
