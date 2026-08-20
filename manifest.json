@@ -1,117 +1,166 @@
 {
   "name": "pep-agentes-v1",
-  "version": "1.0",
-  "generated_at_utc": "2026-07-24T15:37:26.209221+00:00",
+  "version": "1.1",
+  "generated_at_utc": "2026-08-20T13:58:38.4748506Z",
   "policy_notes": [
     "Sem credenciais reais.",
     "Sem dados pessoais.",
     "Scripts locais, auditáveis e sem envio automático de dados.",
-    "Neutralidade profissional sem remover créditos legítimos ou licenças de terceiros."
+    "Neutralidade profissional sem remover créditos legítimos ou licenças de terceiros.",
+    "Codex usa Skill $pepcodex; Custom Prompt /prompts:pepcodex é compatibilidade legada."
   ],
   "files": [
     {
+      "path": ".claude/commands/pep.md",
+      "size_bytes": 1576
+    },
+    {
+      "path": ".claude/settings.json",
+      "size_bytes": 139
+    },
+    {
       "path": ".env.example",
-      "size_bytes": 247
+      "size_bytes": 253
     },
     {
       "path": ".gitignore",
-      "size_bytes": 188
+      "size_bytes": 210
     },
     {
-      "path": "COMO_USAR.md",
-      "size_bytes": 1024
-    },
-    {
-      "path": "README.md",
-      "size_bytes": 4026
-    },
-    {
-      "path": "SECURITY.md",
-      "size_bytes": 737
-    },
-    {
-      "path": "docs/COMO_FOI_GERADO.md",
-      "size_bytes": 1216
-    },
-    {
-      "path": "docs/documentacao.pdf",
-      "size_bytes": 3181
-    },
-    {
-      "path": "prompts/pep-agentes-completo.txt",
-      "size_bytes": 5660
-    },
-    {
-      "path": "prompts/pep-agentes-curto.txt",
-      "size_bytes": 770
-    },
-    {
-      "path": "prompts/pep-agentes-claude.txt",
-      "size_bytes": 5490
+      "path": "CLAUDE.md",
+      "size_bytes": 2450
     },
     {
       "path": "claude/CLAUDE.md",
-      "size_bytes": 2622
+      "size_bytes": 2667
     },
     {
       "path": "claude/commands/pep.md",
-      "size_bytes": 1547
+      "size_bytes": 1576
     },
     {
-      "path": "requirements.txt",
-      "size_bytes": 17
+      "path": "codex/AGENTS.md",
+      "size_bytes": 2587
     },
     {
-      "path": "requirements-app.txt",
-      "size_bytes": 171
+      "path": "codex/prompts/pepcodex.md",
+      "size_bytes": 639
     },
     {
-      "path": "scripts/build_zip.py",
-      "size_bytes": 1415
+      "path": "codex/skills/pepcodex/agents/openai.yaml",
+      "size_bytes": 229
     },
     {
-      "path": "scripts/generate_documentation_pdf.py",
-      "size_bytes": 3842
+      "path": "codex/skills/pepcodex/references/PROTOCOLO.md",
+      "size_bytes": 4731
     },
     {
-      "path": "scripts/install_claude.py",
-      "size_bytes": 7263
+      "path": "codex/skills/pepcodex/SKILL.md",
+      "size_bytes": 4331
     },
     {
-      "path": "scripts/pep_gui.py",
-      "size_bytes": 8684
+      "path": "codex/skills/pepcodex/tools/context_eco.py",
+      "size_bytes": 9732
     },
     {
-      "path": "scripts/build_app.py",
-      "size_bytes": 2820
+      "path": "COMO_USAR.md",
+      "size_bytes": 1465
     },
     {
-      "path": "scripts/publish_github.ps1",
-      "size_bytes": 529
+      "path": "docs/COMO_FOI_GERADO.md",
+      "size_bytes": 1250
     },
     {
-      "path": "scripts/publish_github.sh",
-      "size_bytes": 645
+      "path": "docs/documentacao.pdf",
+      "size_bytes": 3255
     },
     {
-      "path": "scripts/update_prompt.py",
-      "size_bytes": 1153
-    },
-    {
-      "path": "scripts/validate_package.py",
-      "size_bytes": 1432
+      "path": "docs/PEP-CODEX.md",
+      "size_bytes": 2514
     },
     {
       "path": "installer/install_app.ps1",
-      "size_bytes": 2415
-    },
-    {
-      "path": "installer/uninstall_app.ps1",
-      "size_bytes": 713
+      "size_bytes": 2471
     },
     {
       "path": "installer/PEP-Agentes.iss",
-      "size_bytes": 1240
+      "size_bytes": 1278
+    },
+    {
+      "path": "installer/uninstall_app.ps1",
+      "size_bytes": 736
+    },
+    {
+      "path": "LICENSE",
+      "size_bytes": 11558
+    },
+    {
+      "path": "prompts/pep-agentes-claude.txt",
+      "size_bytes": 5622
+    },
+    {
+      "path": "prompts/pep-agentes-completo.txt",
+      "size_bytes": 5867
+    },
+    {
+      "path": "prompts/pep-agentes-curto.txt",
+      "size_bytes": 777
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 5439
+    },
+    {
+      "path": "requirements-app.txt",
+      "size_bytes": 175
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 18
+    },
+    {
+      "path": "scripts/build_app.py",
+      "size_bytes": 2914
+    },
+    {
+      "path": "scripts/build_zip.py",
+      "size_bytes": 1462
+    },
+    {
+      "path": "scripts/generate_documentation_pdf.py",
+      "size_bytes": 3930
+    },
+    {
+      "path": "scripts/install_claude.py",
+      "size_bytes": 7457
+    },
+    {
+      "path": "scripts/install_codex.py",
+      "size_bytes": 6105
+    },
+    {
+      "path": "scripts/pep_gui.py",
+      "size_bytes": 8905
+    },
+    {
+      "path": "scripts/publish_github.ps1",
+      "size_bytes": 551
+    },
+    {
+      "path": "scripts/publish_github.sh",
+      "size_bytes": 670
+    },
+    {
+      "path": "scripts/update_prompt.py",
+      "size_bytes": 1191
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "size_bytes": 1780
+    },
+    {
+      "path": "SECURITY.md",
+      "size_bytes": 761
     }
   ]
 }
