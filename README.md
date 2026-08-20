@@ -16,12 +16,26 @@ pep-agentes-v1/
 ├── prompts/
 │   ├── pep-agentes-completo.txt
 │   └── pep-agentes-curto.txt
+├── claude/
+│   ├── CLAUDE.md
+│   └── commands/pep.md
+├── codex/
+│   ├── AGENTS.md
+│   ├── prompts/pepcodex.md
+│   └── skills/pepcodex/
+│       ├── SKILL.md
+│       ├── agents/openai.yaml
+│       ├── references/PROTOCOLO.md
+│       └── tools/context_eco.py
 ├── docs/
 │   ├── documentacao.pdf
-│   └── COMO_FOI_GERADO.md
+│   ├── COMO_FOI_GERADO.md
+│   └── PEP-CODEX.md
 └── scripts/
     ├── build_zip.py
     ├── generate_documentation_pdf.py
+    ├── install_claude.py
+    ├── install_codex.py
     ├── validate_package.py
     ├── update_prompt.py
     ├── publish_github.sh
@@ -77,6 +91,47 @@ O instalador é idempotente e seguro: usa marcadores `PEP-AGENTES:START/END`, en
 restante de um `CLAUDE.md` existente. Para remover: `python scripts/install_claude.py --uninstall --here`.
 
 A fonte canônica fica em `claude/CLAUDE.md` e `claude/commands/pep.md`.
+
+## Usar no Codex
+
+O repositório também inclui **PEP-Codex v1.0**, uma adaptação do PEP-Agentes para qualquer
+stack de código, com modo econômico de contexto por padrão.
+
+Instalar globalmente:
+
+```bash
+python scripts/install_codex.py --global
+```
+
+Uso recomendado no Codex:
+
+```text
+$pepcodex
+$pepcodex MODE=eco corrigir o login
+$pepcodex MODE=review revisar esta branch
+$pepcodex MODE=bootstrap criar um app FastAPI
+```
+
+Instalar somente no projeto atual:
+
+```bash
+python scripts/install_codex.py --here
+```
+
+Compatibilidade com Custom Prompts:
+
+```bash
+python scripts/install_codex.py --global --legacy-prompt
+```
+
+Depois de reiniciar a sessão, use:
+
+```text
+/prompts:pepcodex
+```
+
+O `/pepcodex` puro não é a sintaxe oficial de Custom Prompts do Codex; o fluxo moderno é a
+Skill `$pepcodex`. Detalhes em `docs/PEP-CODEX.md`.
 
 ### Interface gráfica (sem digitar comandos)
 
