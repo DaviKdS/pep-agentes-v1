@@ -1,0 +1,12 @@
+include README.md
+include COMO_USAR.md
+include CHANGELOG.md
+include LICENSE
+include manifest.json
+include genpyexe.toml
+recursive-include claude *
+recursive-include codex *
+recursive-include prompts *
+recursive-include docs *
+global-exclude __pycache__/*
+global-exclude *.py[cod]

@@ -10,7 +10,13 @@ def package_root() -> Path:
     """Return the project/resource root, supporting PyInstaller onefile."""
     if getattr(sys, "frozen", False):
         return Path(getattr(sys, "_MEIPASS", Path(sys.executable).resolve().parent))
-    return Path(__file__).resolve().parents[2]
+    source_root = Path(__file__).resolve().parents[2]
+    if (source_root / "claude").exists() and (source_root / "codex").exists():
+        return source_root
+    installed_root = Path(sys.prefix) / "share" / "pep-agentes"
+    if installed_root.exists():
+        return installed_root
+    return source_root
 
 
 def user_home() -> Path:

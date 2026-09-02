@@ -13,6 +13,8 @@ dist/
 build/
 .genpyexe/
 node_modules/
+python-dist/
+*.egg-info/
 *.zip
 *.spec
 installer/Output/

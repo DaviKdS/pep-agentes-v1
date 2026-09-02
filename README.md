@@ -27,6 +27,16 @@ pep-agentes-v1/
 
 ## CLI central
 
+Instalação via pip, depois que o pacote estiver publicado no PyPI:
+
+```bash
+python -m pip install pep-agentes
+pep version
+pep install all --here
+```
+
+Uso direto pelo checkout continua disponível:
+
 ```bash
 python scripts/pep.py install all --here
 python scripts/pep.py install codex --global
@@ -85,6 +95,22 @@ Artefatos esperados em `dist/`:
 PEP-Agentes-1.2.0-Portable-x64.exe
 PEP-Agentes-1.2.0-Setup-x64.exe
 PEP-Agentes-1.2.0-SHA256SUMS.txt
+```
+
+## Releases e pacote Python
+
+Tags `v*` disparam:
+
+- build Windows com GitHub Release e assets anexados;
+- build do pacote Python (`sdist` e `wheel`);
+- publicação no PyPI via Trusted Publishing, quando o projeto `pep-agentes` estiver configurado no PyPI.
+
+Build local do pacote:
+
+```bash
+python -m pip install build twine
+python -m build --outdir python-dist
+python -m twine check python-dist/*
 ```
 
 ## Codex

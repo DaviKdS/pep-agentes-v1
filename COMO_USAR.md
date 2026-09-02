@@ -2,6 +2,15 @@
 
 ## Instalar pela CLI central
 
+Via pip, depois da publicação no PyPI:
+
+```bash
+python -m pip install pep-agentes
+pep install all --here
+```
+
+Direto pelo repositório:
+
 ```bash
 python scripts/pep.py install all --here
 python scripts/pep.py install all --global

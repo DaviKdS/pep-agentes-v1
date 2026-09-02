@@ -21,6 +21,7 @@ EXCLUDE_DIRS = {
     "venv",
     "node_modules",
     ".genpyexe",
+    "python-dist",
     "output",
     "build",
     "dist",

@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pep-agentes"
+version = "1.2.0"
+description = "Gerenciador do protocolo PEP-Agentes para Claude Code e Codex"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Davi Kasmirski dos Santos" }
+]
+keywords = ["pep", "codex", "claude", "agents", "developer-tools"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development"
+]
+dependencies = []
+
+[project.optional-dependencies]
+app = ["customtkinter>=5.2.0"]
+build = ["genpyexe>=1.1.1"]
+test = ["pytest>=8.0.0"]
+
+[project.scripts]
+pep = "pep.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/DaviKdS/pep-agentes-v1"
+Repository = "https://github.com/DaviKdS/pep-agentes-v1"
+Issues = "https://github.com/DaviKdS/pep-agentes-v1/issues"
+
+[tool.setuptools.packages.find]
+include = ["pep*"]
+
+[tool.setuptools.data-files]
+"share/pep-agentes/claude" = ["claude/CLAUDE.md"]
+"share/pep-agentes/claude/commands" = ["claude/commands/pep.md"]
+"share/pep-agentes/codex" = ["codex/AGENTS.md"]
+"share/pep-agentes/codex/prompts" = ["codex/prompts/pepcodex.md"]
+"share/pep-agentes/codex/skills/pepcodex" = ["codex/skills/pepcodex/SKILL.md"]
+"share/pep-agentes/codex/skills/pepcodex/agents" = ["codex/skills/pepcodex/agents/openai.yaml"]
+"share/pep-agentes/codex/skills/pepcodex/references" = ["codex/skills/pepcodex/references/PROTOCOLO.md"]
+"share/pep-agentes/codex/skills/pepcodex/tools" = ["codex/skills/pepcodex/tools/context_eco.py"]
+"share/pep-agentes/prompts" = [
+  "prompts/pep-agentes-claude.txt",
+  "prompts/pep-agentes-completo.txt",
+  "prompts/pep-agentes-curto.txt"
+]
+"share/pep-agentes/docs" = [
+  "docs/PEP-CODEX.md",
+  "docs/COMO_FOI_GERADO.md",
+  "docs/documentacao.pdf"
+]

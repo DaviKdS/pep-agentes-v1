@@ -32,13 +32,25 @@
     "version",
     "prompt-copy",
     "windows-build"
+    ,
+    "python-package",
+    "github-release",
+    "pypi-publish"
   ],
   "interfaces": {
     "cli": "scripts/pep.py",
+    "console_script": "pep",
     "gui": "scripts/pep_gui.py",
     "compat_claude": "scripts/install_claude.py",
     "compat_codex": "scripts/install_codex.py",
     "build": "scripts/build_windows.py"
+  },
+  "python_package": {
+    "name": "pep-agentes",
+    "config": "pyproject.toml",
+    "install": "python -m pip install pep-agentes",
+    "command": "pep",
+    "publish": "PyPI via Trusted Publishing"
   },
   "build": {
     "backend": "GenPyEXE",
