@@ -27,7 +27,7 @@ pep-agentes-v1/
 
 ## CLI central
 
-Instalação via pip, depois que o pacote estiver publicado no PyPI:
+Instalação via PyPI:
 
 ```bash
 python -m pip install pep-agentes
@@ -106,11 +106,16 @@ Artefatos esperados em `dist/`:
 
 ```text
 PEP-Agentes-1.2.0-Portable-x64.exe
-PEP-Agentes-1.2.0-Setup-x64.exe
+pep-agentes-1.2.0-setup-x64.exe
 PEP-Agentes-1.2.0-SHA256SUMS.txt
 ```
 
 ## Releases e pacote Python
+
+Links oficiais:
+
+- PyPI: https://pypi.org/project/pep-agentes/
+- Release: https://github.com/DaviKdS/pep-agentes-v1/releases/tag/v1.2.0
 
 Tags `v*` disparam:
 
@@ -121,9 +126,8 @@ Tags `v*` disparam:
 
 O workflow `Python Package` também pode ser executado manualmente para validar o pacote sem publicar.
 
-Release atual:
-
-https://github.com/DaviKdS/pep-agentes-v1/releases/tag/v1.2.0
+O bloco `Packages` do GitHub fica vazio porque o pacote Python oficial é publicado no PyPI, não no
+GitHub Packages.
 
 Build local do pacote:
 
