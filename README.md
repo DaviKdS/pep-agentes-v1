@@ -35,6 +35,19 @@ pep version
 pep install all --here
 ```
 
+Instalação direto do GitHub:
+
+```bash
+python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git"
+python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git"
+```
+
+Instalação de uma versão específica:
+
+```bash
+python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+```
+
 Uso direto pelo checkout continua disponível:
 
 ```bash
@@ -104,6 +117,10 @@ Tags `v*` disparam:
 - build Windows com GitHub Release e assets anexados;
 - build do pacote Python (`sdist` e `wheel`);
 - publicação no PyPI via Trusted Publishing, quando o projeto `pep-agentes` estiver configurado no PyPI.
+
+Release atual:
+
+https://github.com/DaviKdS/pep-agentes-v1/releases/tag/v1.2.0
 
 Build local do pacote:
 

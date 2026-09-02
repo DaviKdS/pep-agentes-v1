@@ -9,6 +9,14 @@ python -m pip install pep-agentes
 pep install all --here
 ```
 
+Direto pelo GitHub:
+
+```bash
+python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git"
+python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git"
+python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+```
+
 Direto pelo repositório:
 
 ```bash

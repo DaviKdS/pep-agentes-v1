@@ -40,6 +40,25 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          name: PEP-Agentes v1.2.0
+          body: |
+            PEP-Agentes v1.2.0 adiciona o PEP Manager multi-provider, integração GenPyEXE,
+            executável Windows, instalador, pacote Python e CLI `pep`.
+
+            Instalação pelo GitHub:
+
+            ```bash
+            python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+            python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+            ```
+
+            Uso:
+
+            ```bash
+            pep version
+            pep install all --here
+            pep doctor all --global
+            ```
           files: |
             dist/*
             python-dist/*
