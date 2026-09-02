@@ -117,9 +117,9 @@ Tags `v*` disparam:
 - build Windows com GitHub Release e assets anexados;
 - build do pacote Python (`sdist` e `wheel`);
 - anexação do pacote Python na Release.
+- publicação no PyPI via Trusted Publishing pelo workflow `release.yml`, quando a versão ainda não existir.
 
-A publicação no PyPI é manual pelo workflow `Python Package` com a opção `publish_pypi`,
-depois que o projeto `pep-agentes` estiver configurado no PyPI Trusted Publishing.
+O workflow `Python Package` também pode ser executado manualmente para validar o pacote sem publicar.
 
 Release atual:
 
