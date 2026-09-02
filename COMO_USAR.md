@@ -9,6 +9,8 @@ python -m pip install pep-agentes
 pep install all --here
 ```
 
+Enquanto o PyPI não estiver configurado, use a instalação direto pelo GitHub.
+
 Direto pelo GitHub:
 
 ```bash
