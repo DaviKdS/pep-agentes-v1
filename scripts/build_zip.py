@@ -13,8 +13,25 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 ZIP_NAME = f"{PROJECT_ROOT.name}.zip"
 OUTPUT_DIR = PROJECT_ROOT / "output"
-EXCLUDE_DIRS = {".git", "__pycache__", ".venv", "venv", "output"}
+EXCLUDE_DIRS = {
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "node_modules",
+    ".genpyexe",
+    "output",
+    "build",
+    "dist",
+}
 EXCLUDE_SUFFIXES = {".pyc", ".pyo"}
+EXCLUDE_NAMES = {
+    "PROMPT_MESTRE_PEP_AGENTES_ATUALIZACAO.md",
+    "PROMPT_MESTRE_PEP_AGENTES_ATUALIZACAO.docx",
+    "package.json",
+    "package-lock.json",
+}
 
 
 def should_include(path: Path) -> bool:
@@ -24,7 +41,7 @@ def should_include(path: Path) -> bool:
         return False
     if path.suffix in EXCLUDE_SUFFIXES:
         return False
-    if path.name in {ZIP_NAME}:
+    if path.name in {ZIP_NAME} | EXCLUDE_NAMES:
         return False
     return path.is_file()
 

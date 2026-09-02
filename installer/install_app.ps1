@@ -28,7 +28,7 @@ function New-Shortcut([string]$LinkPath, [string]$TargetPath, [string]$WorkDir) 
     $sc = $shell.CreateShortcut($LinkPath)
     $sc.TargetPath = $TargetPath
     $sc.WorkingDirectory = $WorkDir
-    $sc.Description = "PEP-Agentes v1.0 - instalador do Claude Code"
+    $sc.Description = "PEP-Agentes v1.2.0 - Manager Claude Code e Codex"
     $sc.Save()
 }
 
@@ -47,8 +47,8 @@ Write-Host "Atalho criado no Menu Iniciar."
 $uninstallScript = Join-Path $ProjectRoot "installer\uninstall_app.ps1"
 $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$AppName"
 New-Item -Path $regPath -Force | Out-Null
-Set-ItemProperty -Path $regPath -Name "DisplayName" -Value "PEP-Agentes v1.0"
-Set-ItemProperty -Path $regPath -Name "DisplayVersion" -Value "1.0"
+Set-ItemProperty -Path $regPath -Name "DisplayName" -Value "PEP-Agentes v1.2.0"
+Set-ItemProperty -Path $regPath -Name "DisplayVersion" -Value "1.2.0"
 Set-ItemProperty -Path $regPath -Name "InstallLocation" -Value $InstallDir
 Set-ItemProperty -Path $regPath -Name "UninstallString" `
     -Value "powershell -ExecutionPolicy Bypass -File `"$uninstallScript`""

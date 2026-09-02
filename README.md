@@ -1,212 +1,117 @@
-# PEP-Agentes v1.0
+# PEP-Agentes v1.2.0
 
-Pacote portátil para ativar um protocolo de desenvolvimento por agentes em qualquer novo chat.
+Gerenciador portátil e instalável do protocolo PEP para múltiplos agentes de desenvolvimento.
+
+O projeto mantém Claude Code e Codex como providers independentes, mas agora compartilha um core comum
+para instalação, status, diagnóstico e reparo.
 
 ## Conteúdo
 
 ```text
 pep-agentes-v1/
-├── README.md
-├── COMO_USAR.md
-├── SECURITY.md
-├── .gitignore
-├── .env.example
-├── manifest.json
-├── requirements.txt
-├── prompts/
-│   ├── pep-agentes-completo.txt
-│   └── pep-agentes-curto.txt
+├── pep/                         # core, providers e serviços do Manager
+├── scripts/
+│   ├── pep.py                   # CLI central
+│   ├── pep_gui.py               # PEP-Agentes Manager
+│   ├── install_claude.py        # wrapper compatível
+│   ├── install_codex.py         # wrapper compatível
+│   ├── build_windows.py         # build preferencial com GenPyEXE
+│   └── build_app.py             # wrapper compatível do build
 ├── claude/
-│   ├── CLAUDE.md
-│   └── commands/pep.md
 ├── codex/
-│   ├── AGENTS.md
-│   ├── prompts/pepcodex.md
-│   └── skills/pepcodex/
-│       ├── SKILL.md
-│       ├── agents/openai.yaml
-│       ├── references/PROTOCOLO.md
-│       └── tools/context_eco.py
+├── prompts/
 ├── docs/
-│   ├── documentacao.pdf
-│   ├── COMO_FOI_GERADO.md
-│   └── PEP-CODEX.md
-└── scripts/
-    ├── build_zip.py
-    ├── generate_documentation_pdf.py
-    ├── install_claude.py
-    ├── install_codex.py
-    ├── validate_package.py
-    ├── update_prompt.py
-    ├── publish_github.sh
-    └── publish_github.ps1
+├── installer/
+└── tests/
 ```
 
-## Uso rápido
-
-1. Abra `prompts/pep-agentes-completo.txt`.
-2. Copie o conteúdo.
-3. Cole no início de um novo chat.
-4. Depois peça o projeto desejado.
-
-Exemplo:
-
-```text
-Ativar PEP-Agentes v1.0.
-Usando esse protocolo, crie um site para barbeiro com agendamento, WhatsApp, SEO local e painel admin.
-```
-
-## Usar no Claude e Claude Code
-
-### Claude (chat / claude.ai)
-
-Cole o conteúdo de `prompts/pep-agentes-claude.txt` no início de uma conversa nova, ou salve-o como
-Instruções personalizadas de um *Project* ou como um *Style*.
-
-### Claude Code
-
-Instale o protocolo no escopo desejado com o instalador (cria `CLAUDE.md` — sempre ativo — e o
-comando `/pep`):
+## CLI central
 
 ```bash
-# só este projeto (diretório atual)
+python scripts/pep.py install all --here
+python scripts/pep.py install codex --global
+python scripts/pep.py update claude --path "C:/Projetos/App" --force
+python scripts/pep.py status all --global
+python scripts/pep.py doctor all --global
+python scripts/pep.py repair codex --global
+python scripts/pep.py uninstall claude --here
+python scripts/pep.py version
+```
+
+Providers: `claude`, `codex`, `all`.
+
+Escopos: `--here`, `--path CAMINHO`, `--global`. O Codex também aceita `--legacy-prompt` para instalar
+ou remover a compatibilidade `/prompts:pepcodex`.
+
+## Compatibilidade
+
+Os comandos antigos continuam disponíveis:
+
+```bash
 python scripts/install_claude.py --here
-
-# projetos específicos
-python scripts/install_claude.py --path "C:/projetos/loja" --path "C:/projetos/api"
-
-# global (~/.claude, vale para todos os projetos)
 python scripts/install_claude.py --global
-
-# sem argumentos: modo interativo (pergunta o escopo)
-python scripts/install_claude.py
-```
-
-Depois, no Claude Code:
-
-- **Sempre ativo:** o `CLAUDE.md` é lido automaticamente em cada sessão do projeto.
-- **Sob demanda:** use `/pep` para ativar/reforçar, ou `/pep crie uma API FastAPI de estoque`.
-
-O instalador é idempotente e seguro: usa marcadores `PEP-AGENTES:START/END`, então preserva o
-restante de um `CLAUDE.md` existente. Para remover: `python scripts/install_claude.py --uninstall --here`.
-
-A fonte canônica fica em `claude/CLAUDE.md` e `claude/commands/pep.md`.
-
-## Usar no Codex
-
-O repositório também inclui **PEP-Codex v1.0**, uma adaptação do PEP-Agentes para qualquer
-stack de código, com modo econômico de contexto por padrão.
-
-Instalar globalmente:
-
-```bash
-python scripts/install_codex.py --global
-```
-
-Uso recomendado no Codex:
-
-```text
-$pepcodex
-$pepcodex MODE=eco corrigir o login
-$pepcodex MODE=review revisar esta branch
-$pepcodex MODE=bootstrap criar um app FastAPI
-```
-
-Instalar somente no projeto atual:
-
-```bash
 python scripts/install_codex.py --here
-```
-
-Compatibilidade com Custom Prompts:
-
-```bash
 python scripts/install_codex.py --global --legacy-prompt
 ```
 
-Depois de reiniciar a sessão, use:
+Eles chamam o mesmo core usado pela CLI central e pela GUI.
 
-```text
-/prompts:pepcodex
-```
-
-O `/pepcodex` puro não é a sintaxe oficial de Custom Prompts do Codex; o fluxo moderno é a
-Skill `$pepcodex`. Detalhes em `docs/PEP-CODEX.md`.
-
-### Interface gráfica (sem digitar comandos)
-
-Há uma GUI em CustomTkinter que faz a instalação por menus: você escolhe a **ação**
-(Instalar/Desinstalar), o **destino** (pastas de projeto ou Global) e clica em *Executar*.
-Também tem um botão para copiar o prompt do Claude (chat) para a área de transferência.
-
-Rodar direto:
+## GUI
 
 ```bash
 python -m pip install -r requirements-app.txt
 python scripts/pep_gui.py
 ```
 
-Gerar o executável (`dist/PEP-Agentes.exe`, onefile, sem console):
+O PEP-Agentes Manager permite escolher plataforma, ação, escopo, executar Doctor/Status e copiar os
+prompts de Claude ou Codex. Os logs são locais e não devem conter tokens, senhas ou chaves.
+
+## Build Windows
+
+O backend preferencial é o GenPyEXE.
 
 ```bash
-python scripts/build_app.py
+python -m pip install -r requirements-app.txt
+python -m pip install -r requirements-build.txt
+python scripts/build_windows.py
 ```
 
-Instalar o app no PC (copia o exe para `%LOCALAPPDATA%\Programs\PEP-Agentes` e cria atalhos
-na Área de Trabalho e no Menu Iniciar):
+O script usa `genpyexeks.build` apenas no processo de build e inclui `claude/`, `codex/`, `prompts/`
+e `docs/` como recursos do executável. O runtime do PEP Manager não depende de GenPyEXE.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File installer/install_app.ps1
+Artefatos esperados em `dist/`:
+
+```text
+PEP-Agentes-1.2.0-Portable-x64.exe
+PEP-Agentes-1.2.0-Setup-x64.exe
+PEP-Agentes-1.2.0-SHA256SUMS.txt
 ```
 
-Desinstalar: `powershell -ExecutionPolicy Bypass -File installer/uninstall_app.ps1`.
-Para gerar um `setup.exe` distribuível, use o Inno Setup com `installer/PEP-Agentes.iss`.
+## Codex
 
-## Recriar documentação e ZIP
+Uso recomendado após instalar:
 
-Instale as dependências opcionais:
+```text
+$pepcodex corrigir o login
+$pepcodex MODE=review revisar esta branch
+```
+
+Compatibilidade opcional:
+
+```text
+/prompts:pepcodex MODE=review revisar esta branch
+```
+
+## Validação
 
 ```bash
-python -m pip install -r requirements.txt
-```
-
-Gerar o PDF:
-
-```bash
-python scripts/generate_documentation_pdf.py
-```
-
-Validar o pacote:
-
-```bash
+python -m compileall -q scripts pep claude codex
 python scripts/validate_package.py
-```
-
-Gerar novo ZIP:
-
-```bash
-python scripts/build_zip.py
-```
-
-## Publicar no GitHub
-
-Usando Git nativo:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin <URL_DO_REPOSITORIO>
-git push -u origin main
-```
-
-Usando GitHub CLI:
-
-```bash
-gh repo create nome-do-repositorio --private --source=. --remote=origin --push
+pytest
 ```
 
 ## Segurança
 
-Os scripts deste pacote não coletam dados pessoais, não enviam arquivos para servidores externos e não incluem credenciais reais. Use `.env.example` como modelo e mantenha segredos fora do Git.
+Os scripts são locais: não coletam dados pessoais, não enviam projetos a servidores externos e não
+leem credenciais desnecessárias. Alterações em `CLAUDE.md` e `AGENTS.md` usam marcadores gerenciados
+para preservar conteúdo manual fora do bloco PEP.

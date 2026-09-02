@@ -1,166 +1,68 @@
 {
   "name": "pep-agentes-v1",
-  "version": "1.1",
-  "generated_at_utc": "2026-08-20T13:58:38.4748506Z",
+  "version": "1.2.0",
+  "generated_at_utc": "2026-09-02T00:00:00Z",
+  "summary": "PEP-Agentes Manager multi-provider para Claude Code e Codex.",
+  "providers": {
+    "claude": {
+      "display_name": "Claude Code",
+      "managed_files": [
+        "CLAUDE.md",
+        ".claude/commands/pep.md"
+      ],
+      "prompt": "prompts/pep-agentes-claude.txt"
+    },
+    "codex": {
+      "display_name": "Codex",
+      "managed_files": [
+        "AGENTS.md",
+        ".agents/skills/pepcodex/"
+      ],
+      "prompt": "codex/prompts/pepcodex.md",
+      "legacy_prompt": "~/.codex/prompts/pepcodex.md"
+    }
+  },
+  "capabilities": [
+    "install",
+    "update",
+    "uninstall",
+    "repair",
+    "status",
+    "doctor",
+    "version",
+    "prompt-copy",
+    "windows-build"
+  ],
+  "interfaces": {
+    "cli": "scripts/pep.py",
+    "gui": "scripts/pep_gui.py",
+    "compat_claude": "scripts/install_claude.py",
+    "compat_codex": "scripts/install_codex.py",
+    "build": "scripts/build_windows.py"
+  },
+  "build": {
+    "backend": "GenPyEXE",
+    "profile": "genpyexe.toml",
+    "runtime_imports_genpyexe": false,
+    "artifacts": [
+      "dist/PEP-Agentes-1.2.0-Portable-x64.exe",
+      "dist/PEP-Agentes-1.2.0-Setup-x64.exe",
+      "dist/PEP-Agentes-1.2.0-SHA256SUMS.txt"
+    ]
+  },
+  "status_states": [
+    "not_installed",
+    "installed",
+    "current",
+    "outdated",
+    "partial",
+    "corrupt"
+  ],
   "policy_notes": [
     "Sem credenciais reais.",
     "Sem dados pessoais.",
     "Scripts locais, auditáveis e sem envio automático de dados.",
-    "Neutralidade profissional sem remover créditos legítimos ou licenças de terceiros.",
-    "Codex usa Skill $pepcodex; Custom Prompt /prompts:pepcodex é compatibilidade legada."
-  ],
-  "files": [
-    {
-      "path": ".claude/commands/pep.md",
-      "size_bytes": 1576
-    },
-    {
-      "path": ".claude/settings.json",
-      "size_bytes": 139
-    },
-    {
-      "path": ".env.example",
-      "size_bytes": 253
-    },
-    {
-      "path": ".gitignore",
-      "size_bytes": 210
-    },
-    {
-      "path": "CLAUDE.md",
-      "size_bytes": 2450
-    },
-    {
-      "path": "claude/CLAUDE.md",
-      "size_bytes": 2667
-    },
-    {
-      "path": "claude/commands/pep.md",
-      "size_bytes": 1576
-    },
-    {
-      "path": "codex/AGENTS.md",
-      "size_bytes": 2587
-    },
-    {
-      "path": "codex/prompts/pepcodex.md",
-      "size_bytes": 639
-    },
-    {
-      "path": "codex/skills/pepcodex/agents/openai.yaml",
-      "size_bytes": 229
-    },
-    {
-      "path": "codex/skills/pepcodex/references/PROTOCOLO.md",
-      "size_bytes": 4731
-    },
-    {
-      "path": "codex/skills/pepcodex/SKILL.md",
-      "size_bytes": 4331
-    },
-    {
-      "path": "codex/skills/pepcodex/tools/context_eco.py",
-      "size_bytes": 9732
-    },
-    {
-      "path": "COMO_USAR.md",
-      "size_bytes": 1465
-    },
-    {
-      "path": "docs/COMO_FOI_GERADO.md",
-      "size_bytes": 1250
-    },
-    {
-      "path": "docs/documentacao.pdf",
-      "size_bytes": 3255
-    },
-    {
-      "path": "docs/PEP-CODEX.md",
-      "size_bytes": 2514
-    },
-    {
-      "path": "installer/install_app.ps1",
-      "size_bytes": 2471
-    },
-    {
-      "path": "installer/PEP-Agentes.iss",
-      "size_bytes": 1278
-    },
-    {
-      "path": "installer/uninstall_app.ps1",
-      "size_bytes": 736
-    },
-    {
-      "path": "LICENSE",
-      "size_bytes": 11558
-    },
-    {
-      "path": "prompts/pep-agentes-claude.txt",
-      "size_bytes": 5622
-    },
-    {
-      "path": "prompts/pep-agentes-completo.txt",
-      "size_bytes": 5867
-    },
-    {
-      "path": "prompts/pep-agentes-curto.txt",
-      "size_bytes": 777
-    },
-    {
-      "path": "README.md",
-      "size_bytes": 5439
-    },
-    {
-      "path": "requirements-app.txt",
-      "size_bytes": 175
-    },
-    {
-      "path": "requirements.txt",
-      "size_bytes": 18
-    },
-    {
-      "path": "scripts/build_app.py",
-      "size_bytes": 2914
-    },
-    {
-      "path": "scripts/build_zip.py",
-      "size_bytes": 1462
-    },
-    {
-      "path": "scripts/generate_documentation_pdf.py",
-      "size_bytes": 3930
-    },
-    {
-      "path": "scripts/install_claude.py",
-      "size_bytes": 7457
-    },
-    {
-      "path": "scripts/install_codex.py",
-      "size_bytes": 6105
-    },
-    {
-      "path": "scripts/pep_gui.py",
-      "size_bytes": 8905
-    },
-    {
-      "path": "scripts/publish_github.ps1",
-      "size_bytes": 551
-    },
-    {
-      "path": "scripts/publish_github.sh",
-      "size_bytes": 670
-    },
-    {
-      "path": "scripts/update_prompt.py",
-      "size_bytes": 1191
-    },
-    {
-      "path": "scripts/validate_package.py",
-      "size_bytes": 1780
-    },
-    {
-      "path": "SECURITY.md",
-      "size_bytes": 761
-    }
+    "CLAUDE.md e AGENTS.md são modificados por blocos com marcadores.",
+    "Codex usa Skill $pepcodex; /prompts:pepcodex é compatibilidade legada."
   ]
 }

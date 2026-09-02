@@ -1,0 +1,19 @@
+[app]
+name = "PEP-Agentes"
+version = "1.2.0"
+publisher = "DaviKdS"
+description = "Gerenciador do protocolo PEP-Agentes para Claude Code e Codex"
+entrypoint = "scripts/pep_gui.py"
+
+[build]
+mode = "onefile"
+console = "windowed"
+isolated = true
+
+[installer]
+enabled = true
+desktop_shortcut = true
+start_menu = true
+per_user_install = true
+add_to_path = false
+launch_after_install = true

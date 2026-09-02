@@ -11,6 +11,8 @@ venv/
 output/
 dist/
 build/
+.genpyexe/
+node_modules/
 *.zip
 *.spec
 installer/Output/

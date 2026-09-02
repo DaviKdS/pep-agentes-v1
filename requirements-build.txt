@@ -1,0 +1,3 @@
+# Dependencias exclusivas do processo de build Windows.
+# Instale com: python -m pip install -r requirements-build.txt
+genpyexe>=1.1.1

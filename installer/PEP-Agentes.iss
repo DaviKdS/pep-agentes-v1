@@ -4,7 +4,7 @@
 ; O executavel dist\PEP-Agentes.exe deve existir antes (rode scripts\build_app.py).
 
 #define AppName "PEP-Agentes"
-#define AppVersion "1.0"
+#define AppVersion "1.2.0"
 #define AppExe "PEP-Agentes.exe"
 
 [Setup]
