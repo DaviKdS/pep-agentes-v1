@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.2
+
+- Adiciona detecção do Claude Code pela extensão oficial do VS Code `anthropic.claude-code`.
+- Adiciona detecção do Codex pela extensão oficial do VS Code `openai.chatgpt`.
+- O `pep doctor` passa a aceitar CLI, extensão VS Code ou ambos como presença válida do provider.
+- Detecta VS Code estável e VS Code Insiders.
+- Quando há múltiplas versões da mesma extensão instaladas, seleciona e exibe a versão mais recente.
+- Adiciona testes automatizados para detecção de extensões, múltiplas versões e coexistência com CLI.
+
 ## 1.2.1
 
 - Corrige a instalação da wheel no Windows removendo `data-files` externos que podiam gerar caminhos inválidos como `D:share\pep-agentes\...`.
