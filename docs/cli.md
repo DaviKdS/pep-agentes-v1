@@ -56,6 +56,31 @@ Diagnostica ferramentas e instalação.
 pep doctor all --global
 ```
 
+A partir da versão 1.2.2, Claude Code e Codex podem ser detectados por CLI, pela extensão oficial do VS Code ou por ambos. A ausência do executável no `PATH` não é tratada como erro quando a extensão correspondente está instalada.
+
+Extensões detectadas:
+
+```text
+Claude Code: anthropic.claude-code
+Codex:       openai.chatgpt
+```
+
+São verificados o VS Code estável (`~/.vscode/extensions`) e o VS Code Insiders (`~/.vscode-insiders/extensions`). Se houver mais de uma versão instalada da mesma extensão, o `doctor` reporta a mais recente.
+
+Exemplos de saída:
+
+```text
+Claude Code........... OK - VS Code extension 2.1.282
+Codex................. OK - VS Code extension 26.5917.62051
+```
+
+Quando CLI e extensão estão presentes:
+
+```text
+Claude Code........... OK - CLI + VS Code extension 2.1.282
+Codex................. OK - CLI + VS Code extension 26.5917.62051
+```
+
 ### `repair`
 
 Reaplica recursos gerenciados quando a instalação está parcial ou desatualizada.
