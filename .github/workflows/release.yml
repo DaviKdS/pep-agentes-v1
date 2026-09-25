@@ -1,4 +1,4 @@
-name: Windows Release
+name: Release
 
 on:
   push:
@@ -28,6 +28,13 @@ jobs:
           python -m pip install build twine
           python -m build --outdir python-dist
           python -m twine check python-dist/*
+      - name: Test wheel installation on Windows
+        shell: pwsh
+        run: |
+          python -m venv .venv-wheel-test
+          $wheel = Get-ChildItem python-dist\*.whl | Select-Object -First 1
+          .\.venv-wheel-test\Scripts\python.exe -m pip install $wheel.FullName
+          .\.venv-wheel-test\Scripts\pep.exe version
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -41,16 +48,16 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: PEP-Agentes v1.2.0
+          name: PEP-Agentes ${{ github.ref_name }}
           body: |
-            PEP-Agentes v1.2.0 adiciona o PEP Manager multi-provider, integração GenPyEXE,
-            executável Windows, instalador, pacote Python e CLI `pep`.
+            PEP-Agentes ${{ github.ref_name }} inclui o PEP Manager multi-provider,
+            integração GenPyEXE, executável Windows, instalador, pacote Python e CLI `pep`.
 
             Instalação pelo GitHub:
 
             ```bash
-            python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
-            python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+            python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@${{ github.ref_name }}"
+            python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git@${{ github.ref_name }}"
             ```
 
             Uso:
@@ -63,6 +70,7 @@ jobs:
           files: |
             dist/*
             python-dist/*
+
   publish-pypi:
     runs-on: ubuntu-latest
     environment:
@@ -78,6 +86,11 @@ jobs:
           python -m pip install build twine
           python -m build --outdir python-dist
           python -m twine check python-dist/*
+      - name: Test wheel installation on Linux
+        run: |
+          python -m venv .venv-wheel-test
+          .venv-wheel-test/bin/python -m pip install python-dist/*.whl
+          .venv-wheel-test/bin/pep version
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
