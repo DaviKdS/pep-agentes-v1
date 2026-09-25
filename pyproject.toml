@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pep-agentes"
-version = "1.2.0"
+version = "1.2.1"
 description = "Gerenciador do protocolo PEP-Agentes para Claude Code e Codex"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -42,22 +42,15 @@ Issues = "https://github.com/DaviKdS/pep-agentes-v1/issues"
 [tool.setuptools.packages.find]
 include = ["pep*"]
 
-[tool.setuptools.data-files]
-"share/pep-agentes/claude" = ["claude/CLAUDE.md"]
-"share/pep-agentes/claude/commands" = ["claude/commands/pep.md"]
-"share/pep-agentes/codex" = ["codex/AGENTS.md"]
-"share/pep-agentes/codex/prompts" = ["codex/prompts/pepcodex.md"]
-"share/pep-agentes/codex/skills/pepcodex" = ["codex/skills/pepcodex/SKILL.md"]
-"share/pep-agentes/codex/skills/pepcodex/agents" = ["codex/skills/pepcodex/agents/openai.yaml"]
-"share/pep-agentes/codex/skills/pepcodex/references" = ["codex/skills/pepcodex/references/PROTOCOLO.md"]
-"share/pep-agentes/codex/skills/pepcodex/tools" = ["codex/skills/pepcodex/tools/context_eco.py"]
-"share/pep-agentes/prompts" = [
-  "prompts/pep-agentes-claude.txt",
-  "prompts/pep-agentes-completo.txt",
-  "prompts/pep-agentes-curto.txt"
-]
-"share/pep-agentes/docs" = [
-  "docs/PEP-CODEX.md",
-  "docs/COMO_FOI_GERADO.md",
-  "docs/documentacao.pdf"
+[tool.setuptools.package-data]
+pep = [
+  "resources/claude/*.md",
+  "resources/claude/commands/*.md",
+  "resources/codex/*.md",
+  "resources/codex/prompts/*.md",
+  "resources/codex/skills/pepcodex/*.md",
+  "resources/codex/skills/pepcodex/agents/*.yaml",
+  "resources/codex/skills/pepcodex/references/*.md",
+  "resources/codex/skills/pepcodex/tools/*.py",
+  "resources/prompts/*.txt"
 ]
