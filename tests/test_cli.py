@@ -5,7 +5,7 @@ import scripts.pep as pep_cli
 
 def test_version_command(capsys):
     assert pep_cli.main(["version"]) == 0
-    assert "1.2.1" in capsys.readouterr().out
+    assert "1.2.2" in capsys.readouterr().out
 
 
 def test_scope_is_required(capsys):
