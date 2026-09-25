@@ -1,0 +1,6 @@
+interface:
+  display_name: "PEP Codex"
+  short_description: "Desenvolvimento generico com contexto economico"
+  default_prompt: "Use $pepcodex em MODE=eco para executar a tarefa atual."
+policy:
+  allow_implicit_invocation: false
