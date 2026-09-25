@@ -1,33 +1,13 @@
-# PEP-Agentes v1.2.0
+# PEP-Agentes
 
-Gerenciador portátil e instalável do protocolo PEP para múltiplos agentes de desenvolvimento.
+[![PyPI](https://img.shields.io/pypi/v/pep-agentes)](https://pypi.org/project/pep-agentes/)
+[![Python](https://img.shields.io/pypi/pyversions/pep-agentes)](https://pypi.org/project/pep-agentes/)
+[![License](https://img.shields.io/github/license/DaviKdS/pep-agentes-v1)](LICENSE)
+[![CI](https://github.com/DaviKdS/pep-agentes-v1/actions/workflows/ci.yml/badge.svg)](https://github.com/DaviKdS/pep-agentes-v1/actions/workflows/ci.yml)
 
-O projeto mantém Claude Code e Codex como providers independentes, mas agora compartilha um core comum
-para instalação, status, diagnóstico e reparo.
+**Gerencie o protocolo PEP para Codex e Claude Code por CLI, interface gráfica ou executável Windows.**
 
-## Conteúdo
-
-```text
-pep-agentes-v1/
-├── pep/                         # core, providers e serviços do Manager
-├── scripts/
-│   ├── pep.py                   # CLI central
-│   ├── pep_gui.py               # PEP-Agentes Manager
-│   ├── install_claude.py        # wrapper compatível
-│   ├── install_codex.py         # wrapper compatível
-│   ├── build_windows.py         # build preferencial com GenPyEXE
-│   └── build_app.py             # wrapper compatível do build
-├── claude/
-├── codex/
-├── prompts/
-├── docs/
-├── installer/
-└── tests/
-```
-
-## CLI central
-
-Instalação via PyPI:
+O PEP-Agentes centraliza instalação, atualização, diagnóstico, reparo e remoção das instruções PEP em projetos locais ou no escopo global do usuário. O mesmo core atende múltiplos providers e mantém recursos empacotados dentro do próprio pacote Python para funcionar de forma consistente em Windows, Linux, `venv`, PyPI e instalação direta pelo GitHub.
 
 ```bash
 python -m pip install pep-agentes
@@ -35,63 +15,260 @@ pep version
 pep install all --here
 ```
 
-Instalação direto do GitHub:
+---
+
+## Índice
+
+- [Por que existe](#por-que-existe)
+- [Instalação](#instalação)
+- [Uso rápido](#uso-rápido)
+- [Providers](#providers)
+- [Escopos](#escopos)
+- [Referência da CLI](#referência-da-cli)
+- [Interface gráfica](#interface-gráfica)
+- [Arquitetura](#arquitetura)
+- [Build para Windows](#build-para-windows)
+- [Release e PyPI](#release-e-pypi)
+- [Documentação](#documentação)
+- [Solução de problemas](#solução-de-problemas)
+- [Segurança e privacidade](#segurança-e-privacidade)
+- [Licença e autoria](#licença-e-autoria)
+
+---
+
+## Por que existe
+
+Manter instruções de agentes em vários projetos tende a gerar cópias divergentes, arquivos manuais fora de sincronia e configurações diferentes entre Codex e Claude Code.
+
+O PEP-Agentes resolve isso com um gerenciador único que:
+
+- instala e atualiza blocos gerenciados sem sobrescrever conteúdo manual fora dos marcadores;
+- mantém providers independentes para Codex e Claude Code;
+- oferece `status`, `doctor`, `repair` e `uninstall` pelo mesmo core;
+- suporta instalação local por projeto ou global;
+- disponibiliza CLI, GUI e artefatos Windows;
+- empacota os recursos necessários dentro da wheel, evitando dependência de caminhos externos como `share/pep-agentes`.
+
+---
+
+## Instalação
+
+### PyPI
+
+```bash
+python -m pip install pep-agentes
+```
+
+Confirme a instalação:
+
+```bash
+pep version
+```
+
+### GitHub
+
+Versão atual da branch principal:
 
 ```bash
 python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git"
-python -m pip install "git+ssh://git@github.com/DaviKdS/pep-agentes-v1.git"
 ```
 
-Instalação de uma versão específica:
+Versão específica:
 
 ```bash
-python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.0"
+python -m pip install "git+https://github.com/DaviKdS/pep-agentes-v1.git@v1.2.1"
 ```
 
-Uso direto pelo checkout continua disponível:
+### Checkout local
 
 ```bash
-python scripts/pep.py install all --here
-python scripts/pep.py install codex --global
-python scripts/pep.py update claude --path "C:/Projetos/App" --force
-python scripts/pep.py status all --global
-python scripts/pep.py doctor all --global
-python scripts/pep.py repair codex --global
-python scripts/pep.py uninstall claude --here
-python scripts/pep.py version
+git clone https://github.com/DaviKdS/pep-agentes-v1.git
+cd pep-agentes-v1
+python -m pip install -e .
 ```
 
-Providers: `claude`, `codex`, `all`.
+Mais detalhes: [docs/instalacao.md](docs/instalacao.md).
 
-Escopos: `--here`, `--path CAMINHO`, `--global`. O Codex também aceita `--legacy-prompt` para instalar
-ou remover a compatibilidade `/prompts:pepcodex`.
+---
 
-## Compatibilidade
+## Uso rápido
 
-Os comandos antigos continuam disponíveis:
+Instalar Codex e Claude Code no projeto atual:
 
 ```bash
-python scripts/install_claude.py --here
-python scripts/install_claude.py --global
-python scripts/install_codex.py --here
-python scripts/install_codex.py --global --legacy-prompt
+pep install all --here
 ```
 
-Eles chamam o mesmo core usado pela CLI central e pela GUI.
-
-## GUI
+Verificar o estado:
 
 ```bash
-python -m pip install -r requirements-app.txt
+pep status all --here
+```
+
+Diagnosticar instalação global:
+
+```bash
+pep doctor all --global
+```
+
+Atualizar e sobrescrever apenas os arquivos gerenciados:
+
+```bash
+pep update all --here --force
+```
+
+Reparar um provider:
+
+```bash
+pep repair codex --global
+```
+
+Remover:
+
+```bash
+pep uninstall all --here
+```
+
+---
+
+## Providers
+
+| Provider | Arquivos principais | Uso recomendado |
+|---|---|---|
+| `codex` | `AGENTS.md`, skill `$pepcodex`, prompt legado opcional | Codex em projetos locais ou configuração global |
+| `claude` | `CLAUDE.md`, comando `/pep` | Claude Code em projeto ou escopo global |
+| `all` | aplica ambos | ambientes que usam os dois providers |
+
+### Codex
+
+Após a instalação:
+
+```text
+$pepcodex corrigir o login
+$pepcodex MODE=review revisar esta branch
+$pepcodex MODE=debug investigar o erro 500
+```
+
+Compatibilidade opcional com prompt legado:
+
+```bash
+pep install codex --global --legacy-prompt
+```
+
+### Claude Code
+
+```bash
+pep install claude --here
+```
+
+O PEP mantém o bloco gerenciado em `CLAUDE.md` e instala o comando `/pep` no escopo correspondente.
+
+---
+
+## Escopos
+
+| Escopo | Exemplo | Efeito |
+|---|---|---|
+| projeto atual | `--here` | usa o diretório atual |
+| projeto específico | `--path "C:/Projetos/App"` | aplica em um caminho informado |
+| global | `--global` | usa os diretórios globais do provider |
+
+Exemplo:
+
+```bash
+pep install codex --path "C:/Projetos/MeuApp"
+```
+
+---
+
+## Referência da CLI
+
+```text
+pep install [claude|codex|all]    instala recursos PEP
+pep update [claude|codex|all]     atualiza recursos gerenciados
+pep uninstall [provider]           remove recursos gerenciados
+pep repair [provider]              repara instalação parcial/desatualizada
+pep status [provider]              mostra o estado atual
+pep doctor [provider]              diagnostica ferramentas e instalação
+pep version                        mostra a versão instalada
+```
+
+Opções de escopo:
+
+```text
+--here
+--path CAMINHO
+--global
+--legacy-prompt
+--force
+```
+
+Referência detalhada: [docs/cli.md](docs/cli.md).
+
+---
+
+## Interface gráfica
+
+Instale as dependências opcionais:
+
+```bash
+python -m pip install "pep-agentes[app]"
+```
+
+No checkout do repositório:
+
+```bash
 python scripts/pep_gui.py
 ```
 
-O PEP-Agentes Manager permite escolher plataforma, ação, escopo, executar Doctor/Status e copiar os
-prompts de Claude ou Codex. Os logs são locais e não devem conter tokens, senhas ou chaves.
+O PEP-Agentes Manager permite selecionar provider, ação e escopo, além de executar diagnóstico e consultar o estado da instalação sem editar arquivos manualmente.
 
-## Build Windows
+---
 
-O backend preferencial é o GenPyEXE.
+## Arquitetura
+
+```text
+pep-agentes-v1/
+├── pep/
+│   ├── cli.py
+│   ├── core/
+│   ├── providers/
+│   ├── services/
+│   └── resources/
+│       ├── claude/
+│       ├── codex/
+│       └── prompts/
+├── scripts/
+├── docs/
+├── installer/
+├── tests/
+├── pyproject.toml
+└── genpyexe.toml
+```
+
+### Fluxo interno
+
+```text
+CLI / GUI
+   ↓
+services.manager
+   ↓
+provider selecionado
+   ↓
+core de paths / markers / models
+   ↓
+arquivos do projeto ou escopo global
+```
+
+Os recursos de runtime ficam em `pep/resources/` e são distribuídos como `package-data`. Essa abordagem evita caminhos dependentes de `sys.prefix/share` e torna a wheel mais previsível entre plataformas.
+
+Detalhes: [docs/arquitetura.md](docs/arquitetura.md).
+
+---
+
+## Build para Windows
+
+O backend preferencial é o [GenPyEXE](https://github.com/DaviKdS/GenPyEXE).
 
 ```bash
 python -m pip install -r requirements-app.txt
@@ -99,35 +276,43 @@ python -m pip install -r requirements-build.txt
 python scripts/build_windows.py
 ```
 
-O script usa `genpyexeks.build` apenas no processo de build e inclui `claude/`, `codex/`, `prompts/`
-e `docs/` como recursos do executável. O runtime do PEP Manager não depende de GenPyEXE.
-
-Artefatos esperados em `dist/`:
+Artefatos esperados:
 
 ```text
-PEP-Agentes-1.2.0-Portable-x64.exe
-pep-agentes-1.2.0-setup-x64.exe
-PEP-Agentes-1.2.0-SHA256SUMS.txt
+PEP-Agentes-1.2.1-Portable-x64.exe
+pep-agentes-1.2.1-setup-x64.exe
+PEP-Agentes-1.2.1-SHA256SUMS.txt
 ```
 
-## Releases e pacote Python
+O GenPyEXE é dependência de build, não de runtime.
 
-Links oficiais:
+---
 
-- PyPI: https://pypi.org/project/pep-agentes/
-- Release: https://github.com/DaviKdS/pep-agentes-v1/releases/tag/v1.2.0
+## Release e PyPI
 
-Tags `v*` disparam:
+Tags `v*` acionam o workflow de release.
 
-- build Windows com GitHub Release e assets anexados;
-- build do pacote Python (`sdist` e `wheel`);
-- anexação do pacote Python na Release.
-- publicação no PyPI via Trusted Publishing pelo workflow `release.yml`, quando a versão ainda não existir.
+Fluxo protegido:
 
-O workflow `Python Package` também pode ser executado manualmente para validar o pacote sem publicar.
+```text
+tag v1.2.1
+   ↓
+build Windows
+   ↓
+build da wheel
+   ↓
+instalação real da wheel no Windows
+   ↓
+GitHub Release + artefatos
+   ↓
+publish-pypi aguarda build-windows
+   ↓
+build + instalação real da wheel no Linux
+   ↓
+publicação no PyPI
+```
 
-O bloco `Packages` do GitHub fica vazio porque o pacote Python oficial é publicado no PyPI, não no
-GitHub Packages.
+A publicação no PyPI depende explicitamente da validação do job Windows. Se a instalação da wheel falhar no Windows, o job de publicação não é executado.
 
 Build local do pacote:
 
@@ -137,31 +322,64 @@ python -m build --outdir python-dist
 python -m twine check python-dist/*
 ```
 
-## Codex
+---
 
-Uso recomendado após instalar:
+## Documentação
 
-```text
-$pepcodex corrigir o login
-$pepcodex MODE=review revisar esta branch
-```
+| Documento | Conteúdo |
+|---|---|
+| [docs/instalacao.md](docs/instalacao.md) | instalação por PyPI, GitHub, checkout e validação |
+| [docs/cli.md](docs/cli.md) | comandos, providers, escopos e exemplos |
+| [docs/arquitetura.md](docs/arquitetura.md) | core, providers, recursos e fluxo interno |
+| [docs/release.md](docs/release.md) | build, CI, GitHub Release e publicação no PyPI |
+| [docs/solucao-de-problemas.md](docs/solucao-de-problemas.md) | erros comuns e diagnóstico |
+| [docs/PEP-CODEX.md](docs/PEP-CODEX.md) | uso específico do provider Codex |
+| [docs/COMO_FOI_GERADO.md](docs/COMO_FOI_GERADO.md) | histórico técnico do projeto |
 
-Compatibilidade opcional:
+---
 
-```text
-/prompts:pepcodex MODE=review revisar esta branch
-```
+## Solução de problemas
 
-## Validação
+### `pep` não é reconhecido
+
+Descubra a pasta de scripts do Python:
 
 ```bash
-python -m compileall -q scripts pep claude codex
-python scripts/validate_package.py
-pytest
+python -c "import sysconfig; print(sysconfig.get_path('scripts'))"
 ```
 
-## Segurança
+Verifique se o launcher foi criado nessa pasta e se ela está no `PATH`.
 
-Os scripts são locais: não coletam dados pessoais, não enviam projetos a servidores externos e não
-leem credenciais desnecessárias. Alterações em `CLAUDE.md` e `AGENTS.md` usam marcadores gerenciados
-para preservar conteúdo manual fora do bloco PEP.
+### Wheel tentando instalar em `D:share\...`
+
+Esse problema existia na versão 1.2.0 por causa do uso de `data-files`. A partir da 1.2.1 os recursos ficam dentro do pacote `pep/resources` e são distribuídos via `package-data`.
+
+### Diagnóstico completo
+
+```bash
+pep doctor all --global
+pep status all --global
+```
+
+Mais casos: [docs/solucao-de-problemas.md](docs/solucao-de-problemas.md).
+
+---
+
+## Segurança e privacidade
+
+- não armazena tokens, senhas ou chaves;
+- não envia o conteúdo dos projetos para um backend próprio;
+- preserva conteúdo manual fora dos blocos PEP gerenciados;
+- usa arquivos locais e caminhos explícitos;
+- GitHub Actions usa Trusted Publishing para publicação no PyPI;
+- a release só publica o pacote após validações reais de instalação.
+
+Consulte também [SECURITY.md](SECURITY.md).
+
+---
+
+## Licença e autoria
+
+Licenciado sob **Apache License 2.0**. Consulte [LICENSE](LICENSE).
+
+Autor e mantenedor: **Davi Kasmirski dos Santos / DaviKdS**.
