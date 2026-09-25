@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pep-agentes"
-version = "1.2.1"
+version = "1.2.2"
 description = "Gerenciador do protocolo PEP-Agentes para Claude Code e Codex"
 readme = "README.md"
 requires-python = ">=3.10"
